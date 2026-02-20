@@ -5,11 +5,13 @@ import { loadSession } from "@/utils/loadSession";
 import { useAuthStore } from "@/store/authStore";
 import useTokenExpiry from "@/hooks/useTokenExpiry";
 import useRefreshToken from "@/hooks/useRefreshToken";
+import Cookies from "js-cookie";
 
 
 export default function AuthInitializer() {
   const setToken = useAuthStore((s) => s.setToken);
   const setUser = useAuthStore((s) => s.setUser);
+  
 
   useEffect(() => {
     const { token, user } = loadSession();
@@ -25,6 +27,13 @@ export default function AuthInitializer() {
 
     if (token) setToken(token);
   }, []);
+
+   useEffect(() => {
+    const token = Cookies.get("token");
+    if (token) {
+      setToken(token);
+    }
+  }, [setToken]);
   
   
   useTokenExpiry();

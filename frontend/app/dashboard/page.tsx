@@ -1,3 +1,4 @@
+"use client";
 import VoiceRecorder from "@/features/voice/VoiceRecorder";
 import ImageCapture from "@/features/image/ImageCapture";
 import ProtectedRoute from "@/components/ProtectedRoute";
@@ -5,18 +6,21 @@ import Navbar from "@/components/Navbar";
 import useAuthGuard from "@/hooks/useAuthGuard";
 import LogoutButton from "@/components/auth/LogoutButton";
 import CapturePanel from "@/features/capture/CapturePanel";
+import DashboardContent from "@/components/DashboardContent";
+
 
 
 
 
 export default function Dashboard() {
+
     const { checking, user } = useAuthGuard();
 
   if (checking) {
     return <p className="p-10 text-center">Checking authentication...</p>;
   }
     
-    useAuthGuard();
+    
 
   return  (
     
@@ -36,6 +40,7 @@ export default function Dashboard() {
       <div className="p-6">
       Dashboard Protected Content
     </div>
+    <DashboardContent />
     </ProtectedRoute>
     <div className="flex justify-end">
   <LogoutButton />

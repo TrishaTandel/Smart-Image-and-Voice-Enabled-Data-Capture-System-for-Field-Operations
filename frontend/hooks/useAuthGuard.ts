@@ -7,6 +7,7 @@ import { useAuthStore } from "@/store/authStore";
 export default function useAuthGuard() {
   const token = useAuthStore((s) => s.token);
   const user = useAuthStore((s) => s.user);
+
   const router = useRouter();
   const [checking, setChecking] = useState(true);
 

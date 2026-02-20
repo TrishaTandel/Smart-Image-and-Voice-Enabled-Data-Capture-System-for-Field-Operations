@@ -3,11 +3,6 @@
 import useAuthGuard from "@/hooks/useAuthGuard";
 import useRoleGuard from "@/hooks/useRoleGuard";
 import { useAuthStore } from "@/store/authStore";
-const user = useAuthStore((s)=>s.user);
-
-{user?.role === "admin" && (
-  <button>Admin Panel</button>
-)}
 
 
 export default function AdminPage() {
@@ -15,6 +10,12 @@ export default function AdminPage() {
   useRoleGuard(["admin"]);
 
   if (checking) return <p>Checking auth...</p>;
+  
+  const user = useAuthStore((s)=>s.user);
+
+{user?.role === "admin" && (
+  <button>Admin Panel</button>
+)}
 
   return <div>Admin Dashboard</div>;
 }
